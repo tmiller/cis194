@@ -5,10 +5,11 @@ toDigits :: Integer -> [Integer]
 toDigits = reverse . toDigitsRev
 
 toDigitsRev :: Integer -> [Integer]
-toDigitsRev x | x <= 0 = []
-              | x > 0 = let digit = x `rem` 10
-                            rest  = truncate $ (toRational x) / 10
-                        in  digit : toDigitsRev rest
+toDigitsRev x
+    | x > 0 = let digit = x `rem` 10
+                  rest  = truncate $ (toRational x) / 10
+              in  digit : toDigitsRev rest
+    | otherwise = []
 
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther = fst . foldr doubleEveryOther' ([], False) 
